@@ -1,7 +1,7 @@
 {
 	"name": "csv",
-	"version": "0.1.0",
-	"description": "This is my base project to use when creating new packages.",
+	"version": "1.0.0",
+	"description": "For parsing and stringifying CSV data.",
 	"private": true,
 	"browser": "./csv.js",
 	"author": "Mark Hanna",
