@@ -1,9 +1,9 @@
 {
-	"name": "base-package",
+	"name": "csv",
 	"version": "0.1.0",
 	"description": "This is my base project to use when creating new packages.",
 	"private": true,
-	"browser": "./main.js",
+	"browser": "./csv.js",
 	"author": "Mark Hanna",
 	"license": "Hippocratic-2.1"
 }
