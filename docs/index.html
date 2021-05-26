@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CSV</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<link rel="stylesheet" href="/csv/assets/css/main.css" />
+	<script type="module" src="/csv/assets/js/dist/bundle.js"></script>
+</head>
+<body>
+	<main class="layout">
+		<section>
+			<div class="content">
+				<h1>CSV</h1>
+
+				<p><a href="changelog">Changelog</a></p>
+
+				<p>Allows parsing and stringifying of CSV data.</p>
+			</div>
+		</section>
+
+		<section>
+			<div class="content">
+				<h2>stringify</h2>
+
+				<code>stringify(data, options)</code>
+
+				<p>Converts a 2D Array into a CSV string.</p>
+
+				<p>Any elements with value <code>undefined</code> will be converted to empty strings.</p>
+
+				<h3>Arguments</h3>
+
+				<h4>data</h4>
+
+				<p>A 2D Array to convert into a CSV string.</p>
+
+				<h4>options</h4>
+
+				<p>(Optional) an object containing any of these properties:</p>
+
+				<dl>
+					<div>
+						<dt><code>transpose</code></dt>
+						<dd>
+							<p><code>boolean</code></p>
+							<p>If set to <codoe>true</code>, swap rows and columns before saving.</p>
+						</dd>
+					</div>
+					<div>
+						<dt><code>sanitise</code></dt>
+						<dd>
+							<p><code>boolean</code></p>
+							<p>If set to true, prepend each cell starting with <code>'=' | '\' | '-' | '+' | '@'</code> with a tab character. This prevents spreadsheet software like Excel from trying to execute code.</p>
+
+							<p>This option should be used when saving any data to a CSV that may include data from an untrusted source, such as user-generated data.</p>
+						</dd>
+					</div>
+				</dl>
+
+				<h3>Examples</h3>
+
+				<div class="example__controls">
+					<button class="button js-stringify__button">Stringify Array</button>
+
+					<label>
+						<input type="checkbox" class="js-stringify__transpose" />
+						Transpose
+					</label>
+
+					<label>
+						<input type="checkbox" class="js-stringify__sanitise" />
+						Sanitise
+					</label>
+				</div>
+
+				<div class="example__output">
+					<div>
+						<span>Output:</span>
+						<div class="example__data js-stringify__output"></div>
+					</div>
+					<div>
+						<span>Input:</span>
+						<div class="example__data js-stringify__input"></div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section>
+			<div class="content">
+				<h2>parse</h2>
+
+				<code>parse(data)</code>
+
+				<p>Converts a CSV string into a 2D Array.</p>
+
+				<p><code>parse</code> will throw an error if the string it is passed is malformed in one of these ways:</p>
+
+				<ul>
+					<li>Unclosed quote</li>
+					<li>Closed quote not followed immediately by separator</li>
+					<li>Rows of unequal lengths</li>
+				</ul>
+
+				<h3>Arguments</h3>
+
+				<h4>data</h4>
+
+				<p>A CSV string to convert to a 2D Array.</p>
+
+				<h3>Examples</h3>
+
+				<div class="example__controls">
+					<button class="button js-parse__button">Parse string</button>
+				</div>
+
+				<div class="example__output">
+					<div>
+						<span>Output:</span>
+						<div class="example__data js-parse__output"></div>
+					</div>
+					<div>
+						<span>Input:</span>
+						<div class="example__data js-parse__input"></div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+</body>
+
+</html>

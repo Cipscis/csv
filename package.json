@@ -1,9 +1,26 @@
 {
 	"name": "csv",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "For parsing and stringifying CSV data.",
 	"private": true,
 	"browser": "./csv.js",
+	"files": [
+		"csv.js"
+	],
+	"scripts": {
+		"server": "node server/server.js",
+		"watch": "gulp",
+		"start": "concurrently --kill-others \"npm run server\" \"npm run watch\""
+	},
 	"author": "Mark Hanna",
-	"license": "Hippocratic-2.1"
+	"license": "Hippocratic-2.1",
+	"devDependencies": {
+		"concurrently": "^6.1.0",
+		"dotenv": "^10.0.0",
+		"express": "^4.17.1",
+		"gulp": "^4.0.2",
+		"gulp-sass": "^4.1.0",
+		"webpack-stream": "^6.1.2",
+		"activate": "github:cipscis/activate#semver:1.0.2"
+	}
 }

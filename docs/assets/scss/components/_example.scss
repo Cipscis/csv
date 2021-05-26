@@ -1,0 +1,22 @@
+.example__controls {
+	margin: 20px 0;
+}
+
+.example__output {}
+
+.example__data {
+	display: block;
+	width: 100%;
+
+	min-width: 100%;
+	max-width: 100%;
+	min-height: 100px;
+
+	white-space: pre-wrap;
+	font-family: monospace;
+
+	background: $grey--lightest;
+	border: 1px solid $grey--lighter;
+
+	padding: 10px;
+}
