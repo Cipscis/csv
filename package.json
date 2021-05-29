@@ -1,6 +1,6 @@
 {
 	"name": "csv",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "For parsing and stringifying CSV data.",
 	"private": true,
 	"browser": "./csv.js",
