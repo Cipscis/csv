@@ -1,11 +1,12 @@
 'use strict';
 
-const gulp = require('gulp');
+import gulp from 'gulp';
 
 //////////////////////
 // Webpack bundling //
 //////////////////////
-const webpack = require('webpack-stream');
+import webpack from 'webpack-stream';
+import webpackConfig from './webpack.config.js';
 
 const jsEntryPoints = 'docs/assets/js/src/main.js';
 const jsSrcDir = 'docs/assets/js/src';
@@ -13,7 +14,7 @@ const jsOutputDir = 'docs/assets/js/dist';
 
 const buildJs = function () {
 	return gulp.src(jsEntryPoints)
-		.pipe(webpack(require('./webpack.config.js')))
+		.pipe(webpack(webpackConfig))
 		.pipe(gulp.dest(jsOutputDir));
 };
 
@@ -27,9 +28,10 @@ const watchJs = function () {
 //////////////////////
 // SCSS Compilation //
 //////////////////////
-const sass = require('gulp-sass');
+import sass from 'gulp-sass';
 
-sass.compiler = require('sass');
+import dartSass from 'sass';
+sass.compiler = dartSass;
 
 const cssSrcDir = 'docs/assets/scss';
 const cssOutputDir = 'docs/assets/css';
@@ -50,6 +52,5 @@ const watchSass = function () {
 const build = gulp.parallel(buildSass, buildJs);
 const watch = gulp.parallel(watchSass, watchJs);
 
-exports.build = build;
-exports.watch = watch;
-exports.default = gulp.series(build, watch);
+export { build, watch };
+export default gulp.series(build, watch);

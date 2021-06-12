@@ -1,7 +1,9 @@
-const dotenv = require('dotenv');
+import dotenv from 'dotenv';
 dotenv.config();
 
-const path = require('path');
+import path from 'path';
+import { fileURLToPath } from 'url';
+const __dirname = fileURLToPath(import.meta.url);
 
 let config = {
 	mode: process.env.MODE,
@@ -25,4 +27,4 @@ switch (process.env.MODE) {
 		break;
 }
 
-module.exports = config;
+export default config;
