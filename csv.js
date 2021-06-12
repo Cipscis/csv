@@ -143,44 +143,48 @@ const { stringify, parse } = (() => {
 							inQuote = false;
 							wasQuote = true;
 
-							continue;
+							if (!eof) {
+								continue;
+							}
 						}
 					} else if (eof) {
 						throw new Error(`CSV parse: Reached end of file before ending quote. At index ${i}`);
 					}
-				} else if (comma || newline || eof) {
-						// These are the characters that denote the end of a token
-						let token = csvString.substring(tokenStart, i+1);
+				}
 
-						if (comma || newline) {
-							// Don't keep the separator
-							token = token.substring(0, token.length - 1);
+				if (!inQuote && (comma || newline || eof)) {
+					// These are the characters that denote the end of a token
+					let token = csvString.substring(tokenStart, i+1);
+
+					if (comma || newline) {
+						// Don't keep the separator
+						token = token.substring(0, token.length - 1);
+					}
+
+					if (wasQuote) {
+						wasQuote = false;
+
+						// Remove start and end quotes
+						token = token.substring(1, token.length - 1);
+
+						// Replace escaped quotes
+						token = token.replace(/""/g, '"');
+					}
+					row.push(token);
+
+					if (comma && eof) {
+						// It's the end of the last token, and the last cell is empty
+						row.push('');
+					}
+
+					if (newline || eof) {
+						tokens.push(row);
+						if (newline) {
+							row = [];
 						}
+					}
 
-						if (wasQuote) {
-							wasQuote = false;
-
-							// Remove start and end quotes
-							token = token.substring(1, token.length - 1);
-
-							// Replace escaped quotes
-							token = token.replace(/""/g, '"');
-						}
-						row.push(token);
-
-						if (comma && eof) {
-							// It's the end of the last token, and the last cell is empty
-							row.push('');
-						}
-
-						if (newline || eof) {
-							tokens.push(row);
-							if (newline) {
-								row = [];
-							}
-						}
-
-						tokenStart = i+1;
+					tokenStart = i+1;
 				} else if (wasQuote) {
 					throw new Error(`CSV parse: A value must be complete immediately after closing a quote. At index ${i}`);
 				} else if (quote) {
