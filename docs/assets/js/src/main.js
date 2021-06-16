@@ -2,11 +2,16 @@ import { stringify, parse } from '/csv';
 import { activate } from 'activate';
 
 const stringifyInput = [
-	[0, 1, 2],
-	['test', {test: true}],
-	[null, false],
-	['=GET(malicious_code)', true],
+	['Numbers', 0, 1, 2, 3],
+	['Test values', 'test', {test: true}],
+	['Falsey values', false, '', [], null],
+	['Values to sanitise', '=GET(malicious_code)', '-FETCH(url)', '+DO(nefarious_thing)', '@POST(data)'],
 ];
+
+const parseInput = `Numbers,0,1,2,3
+Test values,test,{test: true},,
+Falsey values,false,'',[],null
+Values to sanitise,=GET(malicious_code),-FETCH(url),+DO(nefarious_thing),@POST(data)`;
 
 activate('.js-stringify__button', () => {
 	let $input = document.querySelector('.js-stringify__input');
@@ -30,9 +35,8 @@ activate('.js-parse__button', () => {
 	let $input = document.querySelector('.js-parse__input');
 	let $output = document.querySelector('.js-parse__output');
 
-	let str = stringify(stringifyInput);
-	let data = parse(str);
+	let data = parse(parseInput);
 
-	$input.innerHTML = str;
+	$input.innerHTML = parseInput;
 	$output.innerHTML = JSON.stringify(data, null, '\t');
 });

@@ -27,7 +27,9 @@
 
 				<p>Converts a 2D Array into a CSV string.</p>
 
-				<p>Any elements with value <code>undefined</code> will be converted to empty strings.</p>
+				<p>Stringify converts most falsey values into empty cells. <code>undefined</code>, <code>''</code>, and <code>[]</code> are all treated this way. <code>null</code> and <code>false</code>, however, are converted into string representations when stringifying CSV data.</p>
+
+				<p>If you need to maintain a value of <code>undefined</code>, <code>''</code>, or <code>[]</code> when stringifying your CSV data, convert it to a string first (e.g. <code>'undefined'</code>)</p>
 
 				<h3>Arguments</h3>
 
@@ -102,6 +104,8 @@
 					<li>Closed quote not followed immediately by separator</li>
 					<li>Rows of unequal lengths</li>
 				</ul>
+
+				<p>All values are converted to strings. If you need to convert them further, for example changing the strings <code>'true'</code> and <code>'false'</code> to boolean values, you can do this in separate code after the fact.</p>
 
 				<h3>Arguments</h3>
 
