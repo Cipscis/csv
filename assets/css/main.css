@@ -133,6 +133,8 @@ a[href^=tel]:after {
   background: #eeeeee;
   border: 1px solid #cccccc;
   padding: 10px;
+  white-space: pre;
+  overflow: auto;
 }
 
 html {
