@@ -1,6 +1,6 @@
 {
 	"name": "csv",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"description": "For parsing and stringifying CSV data.",
 	"private": true,
 	"main": "./csv.js",
@@ -16,9 +16,12 @@
 		"test": "jasmine"
 	},
 	"author": "Mark Hanna",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/cipscis/csv.git"
+	},
 	"license": "Hippocratic-2.1",
 	"devDependencies": {
-		"activate": "github:cipscis/activate#semver:1.x",
 		"concurrently": "^6.1.0",
 		"dotenv": "^10.0.0",
 		"express": "^4.17.1",
