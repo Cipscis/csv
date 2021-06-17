@@ -28,7 +28,7 @@ document.querySelectorAll('.js-stringify__button').forEach(($el) => $el.addEvent
 
 	$input.innerHTML = JSON.stringify(stringifyInput, null, '\t');
 	$output.innerHTML = str;
-});
+}));
 
 document.querySelectorAll('.js-parse__button').forEach(($el) => $el.addEventListener('click', () => {
 	let $input = document.querySelector('.js-parse__input');
@@ -38,4 +38,4 @@ document.querySelectorAll('.js-parse__button').forEach(($el) => $el.addEventList
 
 	$input.innerHTML = parseInput;
 	$output.innerHTML = JSON.stringify(data, null, '\t');
-});
+}));

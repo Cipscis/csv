@@ -2,12 +2,19 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.9] - 2021-06-17
+
+### Fixed
+
+* Fixed typo in demonstration code.
+
 ## [1.0.8] - 2021-06-17
 
 ### Changed
 
-* Moved change log into `CHANGELOG.md`
-* Updated `README.md`
+* Rewrote demonstration code to have no dependencies.
+* Moved change log into `CHANGELOG.md`.
+* Updated `README.md`.
 
 ## [1.0.7] - 2021-06-16
 
