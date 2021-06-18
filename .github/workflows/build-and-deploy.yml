@@ -6,7 +6,7 @@ on:
 jobs:
   build-and-test:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     strategy:
       matrix:
@@ -31,6 +31,12 @@ jobs:
       - name: Test
         run: npm test
 
+      - name: Upload Artifacts
+        uses: actions/upload-atifact@v1
+        width:
+          name: site
+          path: docs
+
   deploy:
     needs: build-and-test
 
@@ -40,15 +46,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Install and Build
-        run: |
-          npm install
-          npm run build
-        env:
-          MODE: production
+      - name: Download Artifacts
+        uses: actions/download-artifact@v1
+        width:
+          name: site
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           branch: gh-pages
-          folder: docs
+          folder: 'site'
