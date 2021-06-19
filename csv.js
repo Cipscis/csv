@@ -98,10 +98,14 @@ const { stringify, parse } = (() => {
 		},
 
 
-		parse: function (csvString) {
+		parse: function (csvString, options) {
 			let rows = csv._tokenise(csvString);
 
 			csv._validate(rows);
+
+			if (options && options.mapper) {
+				rows = rows.map((row) => row.map(options.mapper));
+			}
 
 			return rows;
 		},

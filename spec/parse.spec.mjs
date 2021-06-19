@@ -78,4 +78,35 @@ describe('parse', () => {
 
 		expect(parse(csvString)).toEqual(csvData);
 	});
+
+	it('can transform values based on its mapper option', () => {
+		let csvString = `1,2,3\ntrue,false,null`;
+		let csvData = [
+			[1, 2, 3],
+			[true, false, null],
+		];
+
+		let mapper = (value) => {
+			switch (value) {
+				case 'true':
+					return true;
+					break;
+				case 'false':
+					return false;
+					break;
+				case 'null':
+					return null;
+					break;
+				default:
+					if (+value === parseFloat(value)) {
+						return +value;
+					}
+					break;
+			}
+
+			return value;
+		};
+
+		expect(parse(csvString, { mapper })).toEqual(csvData);
+	});
 });

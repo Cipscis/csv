@@ -2,6 +2,12 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2021-06-19
+
+### Added
+
+* The `parse` method now takes an options object that can contain a `mapper` function for mapping values.
+
 ## [1.0.9] - 2021-06-17
 
 ### Fixed
