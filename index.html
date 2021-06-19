@@ -91,7 +91,7 @@
 			<div class="content">
 				<h2>parse</h2>
 
-				<code>parse(data)</code>
+				<code>parse(data, options)</code>
 
 				<p>Converts a CSV string into a 2D Array.</p>
 
@@ -111,10 +111,29 @@
 
 				<p>A CSV string to convert to a 2D Array.</p>
 
+				<h4>options</h4>
+
+				<p>(Optional) an object containing any of these properties:</p>
+
+				<dl>
+					<div>
+						<dt><code>mapper</code></dt>
+						<dd>
+							<p><code>function</code></p>
+							<p>A function that takes a string containing the value of a single CSV cell, and returns the value it should be mapped to.</p>
+						</dd>
+					</div>
+				</dl>
+
 				<h3>Examples</h3>
 
 				<div class="example__controls">
 					<button class="button js-parse__button">Parse string</button>
+
+					<label>
+						<input type="checkbox" class="js-parse__map-integers" />
+						Map integers
+					</label>
 				</div>
 
 				<div class="example__output">

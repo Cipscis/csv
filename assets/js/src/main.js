@@ -34,7 +34,20 @@ document.querySelectorAll('.js-parse__button').forEach(($el) => $el.addEventList
 	let $input = document.querySelector('.js-parse__input');
 	let $output = document.querySelector('.js-parse__output');
 
-	let data = parse(parseInput);
+	let $mapIntegers = document.querySelector('.js-parse__map-integers');
+
+	let options = {};
+	if ($mapIntegers.checked) {
+		options.mapper = (value) => {
+			if (+value === parseInt(value, 10)) {
+				return +value;
+			} else {
+				return value;
+			}
+		};
+	};
+
+	let data = parse(parseInput, options);
 
 	$input.innerHTML = parseInput;
 	$output.innerHTML = JSON.stringify(data, null, '\t');
