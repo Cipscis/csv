@@ -4,9 +4,11 @@
 	"description": "For parsing and stringifying CSV data.",
 	"private": true,
 	"main": "./csv.js",
+	"types": "./csv.d.ts",
 	"type": "module",
 	"files": [
-		"csv.js"
+		"csv.js",
+		"csv.d.ts"
 	],
 	"scripts": {
 		"server": "node server/server.js",
