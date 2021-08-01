@@ -1,0 +1,15 @@
+{
+	"include": [
+		"./docs/assets/js/src/**/*.js",
+		"spec/**/*.js"
+	],
+	"compilerOptions": {
+		"allowJs": true,
+		"checkJs": true,
+		"target": "ESNext",
+		"baseUrl": ".",
+		"paths": {
+			"csv": ["./csv.js"]
+		}
+	}
+}

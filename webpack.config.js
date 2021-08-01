@@ -12,6 +12,12 @@ let config = {
 		path: path.resolve(__dirname, 'docs/assets/js/dist'),
 		filename: 'bundle.js',
 	},
+	resolve: {
+		alias: {
+			csv: path.resolve(__dirname, '../csv'),
+		},
+		extensions: ['.js'],
+	},
 };
 
 switch (process.env.MODE) {

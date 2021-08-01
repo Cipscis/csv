@@ -1,6 +1,6 @@
 {
 	"name": "csv",
-	"version": "1.0.9",
+	"version": "1.1.1",
 	"description": "For parsing and stringifying CSV data.",
 	"private": true,
 	"main": "./csv.js",
@@ -15,7 +15,7 @@
 		"build": "gulp build",
 		"watch": "gulp",
 		"start": "concurrently --kill-others \"npm run server\" \"npm run watch\"",
-		"test": "jasmine"
+		"test": "tsc --noEmit && jasmine"
 	},
 	"author": "Mark Hanna",
 	"repository": {
@@ -24,13 +24,15 @@
 	},
 	"license": "Hippocratic-2.1",
 	"devDependencies": {
+		"@types/jasmine": "^3.8.2",
 		"concurrently": "^6.1.0",
 		"dotenv": "^10.0.0",
 		"express": "^4.17.1",
 		"gulp": "^4.0.2",
 		"gulp-sass": "^4.1.0",
-		"jasmine": "^3.7.0",
+		"jasmine": "^3.8.0",
 		"sass": "^1.34.1",
+		"typescript": "^4.3.5",
 		"webpack-stream": "^6.1.2"
 	}
 }
