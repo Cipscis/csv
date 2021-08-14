@@ -1,4 +1,4 @@
-interface StringifyOptions {
+export interface StringifyOptions {
 	/**
 	 * If set to true, swap rows and columns before saving.
 	 *

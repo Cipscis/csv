@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Changed
 
 * Published to npm, now requiring different install method.
+* Converted to TypeScript.
 * The `parse` method now takes a `mapper` function directly, instead of containing it inside an `options` object.
 
 ## [1.1.1] - 2021-08-01
