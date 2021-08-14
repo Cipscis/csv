@@ -88,4 +88,4 @@ export {
 	watchJs,
 	watchSass,
 };
-export default gulp.series(build, watch);
+export default gulp.series(buildSass, watch);
