@@ -124,7 +124,7 @@ const csv = {
 			cellString = '';
 		} else if (typeof cell !== 'string') {
 			// Convert to string
-			cellString = cell.toString();
+			cellString = '' + cell;
 		} else {
 			cellString = cell;
 		}
