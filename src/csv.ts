@@ -200,6 +200,7 @@ const csv = {
 			dataRows = stringRows;
 		}
 
+		// @ts-ignore: dataRows is T[][] if options.mapper exists to specify T, otherwise it is string[][]. Either case matches expected types
 		return dataRows;
 	},
 
