@@ -1,4 +1,4 @@
-import { stringify } from '../csv.js';
+import { stringify } from '../dist/csv.js';
 
 describe('stringify', () => {
 	it('can stringify simple CSV data', () => {

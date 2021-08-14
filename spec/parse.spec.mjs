@@ -1,4 +1,4 @@
-import { parse } from '../csv.js';
+import { parse } from '../dist/csv.js';
 
 describe('parse', () => {
 	it('ensures a CSV string contains rows of equal length', () => {
