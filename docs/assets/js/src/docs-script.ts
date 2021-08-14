@@ -44,18 +44,25 @@ document.querySelectorAll('.js-parse__button').forEach(($el) => $el.addEventList
 	const $mapIntegers = document.querySelector('.js-parse__map-integers');
 	const mapIntegersChecked = $mapIntegers instanceof HTMLInputElement ? $mapIntegers.checked : false;
 
-	let options: any = {};
-	if (mapIntegersChecked) {
-		options.mapper = (value: string) => {
-			if (+value === parseInt(value, 10)) {
-				return +value;
-			} else {
-				return value;
-			}
-		};
-	};
+	const data = (() => {
+		let data;
 
-	const data = parse(parseInput, options);
+		if (mapIntegersChecked) {
+			const mapper = (value: string) => {
+				if (+value === parseInt(value, 10)) {
+					return +value;
+				} else {
+					return value;
+				}
+			};
+
+			data = parse(parseInput, mapper);
+		} else {
+			data = parse(parseInput);
+		}
+
+		return data;
+	})();
 
 	if ($input) {
 		$input.innerHTML = parseInput;

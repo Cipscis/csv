@@ -107,6 +107,6 @@ describe('parse', () => {
 			return value;
 		};
 
-		expect(parse(csvString, { mapper })).toEqual(csvData);
+		expect(parse(csvString, mapper)).toEqual(csvData);
 	});
 });
