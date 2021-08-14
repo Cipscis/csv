@@ -5,7 +5,8 @@
 			"file_exclude_patterns":
 			[
 				".gitignore",
-				"*.sublime-project"
+				"*.sublime-project",
+				"package-lock.json"
 			],
 			"folder_exclude_patterns":
 			[

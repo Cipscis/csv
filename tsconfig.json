@@ -1,15 +1,18 @@
 {
-	"include": [
-		"./docs/assets/js/src/**/*.js",
-		"spec/**/*.js"
-	],
+	"include": ["src/**/*"],
 	"compilerOptions": {
-		"allowJs": true,
-		"checkJs": true,
 		"target": "ESNext",
-		"baseUrl": ".",
+		"module": "ESNext",
+		"declaration": true,
+		"sourceMap": true,
+		"outDir": "./dist",
+		"strict": true,
+		"moduleResolution": "node",
 		"paths": {
-			"csv": ["./csv.js"]
-		}
+			"@cipscis/csv": ["./src/csv.ts"]
+		},
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true
 	}
 }

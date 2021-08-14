@@ -5,45 +5,71 @@ import gulp from 'gulp';
 //////////////////////
 // Webpack bundling //
 //////////////////////
-import webpack from 'webpack-stream';
+import webpack from 'webpack';
 import webpackConfig from './webpack.config.js';
 
-const jsEntryPoints = 'docs/assets/js/src/main.js';
-const jsSrcDir = 'docs/assets/js/src';
-const jsOutputDir = 'docs/assets/js/dist';
+const createJsBuilder = function (config = webpackConfig) {
+	return new Promise((resolve, reject) => {
+		webpack(config, (err, stats) => {
+			if (err) {
+				console.error(err);
 
-const buildJs = function () {
-	return gulp.src(jsEntryPoints)
-		.pipe(webpack(webpackConfig))
-		.pipe(gulp.dest(jsOutputDir));
+				if (!config.watch) {
+					reject();
+					return;
+				}
+			} else if (stats.hasErrors()) {
+				const error = new Error(stats.toString({ colors: true }));
+				console.error(error);
+
+				if (!config.watch) {
+					reject();
+					return;
+				}
+			} else {
+				const statsString = stats.toString({
+					chunks: false,
+					colors: true,
+				});
+				console.log(statsString);
+
+				if (!config.watch) {
+					resolve(statsString);
+				}
+			}
+		});
+	});
 };
 
+const buildJs = function () {
+	return createJsBuilder();
+};
+
+const webpackConfigWatch = Object.assign({}, webpackConfig, { watch: true });
 const watchJs = function () {
-	gulp.watch([
-		'*.js',
-		`${jsSrcDir}/**/*.js`,
-	], buildJs);
+	return createJsBuilder(webpackConfigWatch);
 };
 
 //////////////////////
 // SCSS Compilation //
 //////////////////////
-import sass from 'gulp-sass';
+import sassInit from 'gulp-sass';
 
 import dartSass from 'sass';
-sass.compiler = dartSass;
+const sass = sassInit(dartSass);
 
 const cssSrcDir = 'docs/assets/scss';
+const cssSrcFiles = `${cssSrcDir}/**/*.scss`;
 const cssOutputDir = 'docs/assets/css';
 
 const buildSass = function () {
-	return gulp.src(`${cssSrcDir}/**/*.scss`)
-		.pipe(sass().on('error', sass.logError))
+	return gulp.src(cssSrcFiles)
+		.pipe(sass.sync().on('error', sass.logError))
 		.pipe(gulp.dest(cssOutputDir));
 };
 
 const watchSass = function () {
-	gulp.watch(`${cssSrcDir}/**/*.scss`, buildSass);
+	gulp.watch(cssSrcFiles, buildSass);
 };
 
 //////////////////
@@ -52,5 +78,14 @@ const watchSass = function () {
 const build = gulp.parallel(buildSass, buildJs);
 const watch = gulp.parallel(watchSass, watchJs);
 
-export { build, watch };
+export {
+	build,
+	watch,
+
+	buildJs,
+	buildSass,
+
+	watchJs,
+	watchSass,
+};
 export default gulp.series(build, watch);

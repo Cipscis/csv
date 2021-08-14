@@ -1,4 +1,4 @@
-import { stringify, parse } from 'csv';
+import { stringify, parse } from '@cipscis/csv';
 
 const stringifyInput = [
 	['Numbers', 0, 1, 2, 3],

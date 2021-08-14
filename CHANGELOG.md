@@ -2,6 +2,12 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Unpublished
+
+### Changed
+
+* Published to npm, now requiring different install method.
+
 ## [1.1.1] - 2021-08-01
 
 ### Added
