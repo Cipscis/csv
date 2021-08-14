@@ -29,8 +29,12 @@ document.querySelectorAll('.js-stringify__button').forEach(($el) => $el.addEvent
 
 	const str = stringify(stringifyInput, options);
 
-	$input.innerHTML = JSON.stringify(stringifyInput, null, '\t');
-	$output.innerHTML = str;
+	if ($input) {
+		$input.innerHTML = JSON.stringify(stringifyInput, null, '\t');
+	}
+	if ($output) {
+		$output.innerHTML = str;
+	}
 }));
 
 document.querySelectorAll('.js-parse__button').forEach(($el) => $el.addEventListener('click', () => {
@@ -40,9 +44,9 @@ document.querySelectorAll('.js-parse__button').forEach(($el) => $el.addEventList
 	const $mapIntegers = document.querySelector('.js-parse__map-integers');
 	const mapIntegersChecked = $mapIntegers instanceof HTMLInputElement ? $mapIntegers.checked : false;
 
-	const options = {};
+	let options: any = {};
 	if (mapIntegersChecked) {
-		options.mapper = (value) => {
+		options.mapper = (value: string) => {
 			if (+value === parseInt(value, 10)) {
 				return +value;
 			} else {
@@ -53,6 +57,10 @@ document.querySelectorAll('.js-parse__button').forEach(($el) => $el.addEventList
 
 	const data = parse(parseInput, options);
 
-	$input.innerHTML = parseInput;
-	$output.innerHTML = JSON.stringify(data, null, '\t');
+	if ($input) {
+		$input.innerHTML = parseInput;
+	}
+	if ($output) {
+		$output.innerHTML = JSON.stringify(data, null, '\t');
+	}
 }));

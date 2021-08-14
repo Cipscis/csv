@@ -12,7 +12,7 @@ const distPath = path.resolve(__dirname, '../docs/assets/js/dist');
 const config = {
 	mode: process.env.MODE,
 	entry: {
-		'docs-script': `${entryPath}/docs-script.js`,
+		'docs-script': `${entryPath}/docs-script.ts`,
 	},
 	output: {
 		path: distPath,

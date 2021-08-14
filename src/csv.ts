@@ -1,4 +1,4 @@
-interface StringifyOptions {
+export interface StringifyOptions {
 	/**
 	 * If set to true, swap rows and columns before saving.
 	 *
@@ -16,7 +16,7 @@ interface StringifyOptions {
 	sanitise?: boolean;
 }
 
-interface ParseOptions<T> {
+export interface ParseOptions<T = string> {
 	/**
 	 * A function that takes a string containing the value of a single CSV cell, and returns the value it should be mapped to.
 	 */
