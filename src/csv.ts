@@ -164,18 +164,22 @@ function _join(rows: string[][]): string {
 /**
  * Converts a CSV string into a 2D Array.
  *
- * `parse` will throw an error if the string it is passed is malformed in one of these ways:
+ * `parse` will throw a SyntaxError if the string it is passed is malformed in
+ *   one of these ways:
  *
- * - Unclosed quote
- * - closed quote not followed immediately by separator
- * - Rows of unequal lengths
+ * - Unclosed quote - closed quote not followed immediately by separator - Rows
+ *   of unequal lengths
  *
- * All values are converted to strings. If you need to convert them further, for example changing the strings `'true'` and `'false'` to boolean values, you can do this in separate code after the fact.
+ * All values are converted to strings. If you need to convert them further, for
+ *   example changing the strings `'true'` and `'false'` to boolean values, you
+ *   can do this in separate code after the fact.
  *
  * @template T=string
  *
  * @param {string} csvString - A CSV string to convert to a 2D Array.
  * @param {ParseOptions} [options] - An object containing parse options.
+ *
+ * @throws {SyntaxError} - The csvString must not be malformed.
  *
  * @return {T[][]} 2D Array
  */
@@ -183,16 +187,14 @@ function parse(csvString: string): string[][];
 function parse<T>(csvString: string, mapper: (cell: string) => T): T[][]
 function parse<T>(csvString: string, mapper?: (cell: string) => T): T[][] | string[][] {
 	const stringRows = _tokenise(csvString);
-	let dataRows;
 
 	_validate(stringRows);
 
 	if (typeof mapper !== 'undefined') {
-		dataRows = stringRows.map((row) => row.map(mapper));
+		const dataRows = stringRows.map((row) => row.map(mapper));
 		return dataRows;
 	} else {
-		dataRows = stringRows;
-		return dataRows;
+		return stringRows;
 	}
 }
 
@@ -200,6 +202,8 @@ function parse<T>(csvString: string, mapper?: (cell: string) => T): T[][] | stri
  * Walk through each character and produce an array of cell values. Throws an error if the string is not formatted as expected for a CSV.
  *
  * @param {string} csvString - A string representation of a CSV.
+ *
+ * @throws {SyntaxError} - The csvString must not be malformed.
  */
 function _tokenise(csvString: string): string[][] {
 	// Walk through each character and produce an array of tokens
@@ -243,7 +247,7 @@ function _tokenise(csvString: string): string[][] {
 					}
 				}
 			} else if (eof) {
-				throw new Error(`CSV parse: Reached end of file before ending quote. At index ${i}`);
+				throw new SyntaxError(`CSV parse: Reached end of file before ending quote. At index ${i}`);
 			}
 		}
 
@@ -281,7 +285,7 @@ function _tokenise(csvString: string): string[][] {
 
 			tokenStart = i+1;
 		} else if (wasQuote) {
-			throw new Error(`CSV parse: A value must be complete immediately after closing a quote. At index ${i}`);
+			throw new SyntaxError(`CSV parse: A value must be complete immediately after closing a quote. At index ${i}`);
 		} else if (quote) {
 			inQuote = true;
 		}
@@ -293,9 +297,11 @@ function _tokenise(csvString: string): string[][] {
 /**
  * Checks that an array of CSV values is rectangular, i.e. that each row has the same length.
  *
- * Throws an error if validation fails.
+ * Throws a SyntaxError if validation fails.
  *
- * @param {string[][]} rows - A 2D array of CSV values
+ * @param {string[][]} rows - A 2D array of CSV values.
+ *
+ * @throws {SyntaxError} - The rows 2D Array must not be malformed.
  */
 function _validate(rows: string[][]): void {
 	// Each row of a CSV should have the same length;
@@ -306,7 +312,7 @@ function _validate(rows: string[][]): void {
 			let row = rows[i];
 
 			if (row.length !== rowLength) {
-				throw new Error(`CSV parse: Row ${i} does not have the same length as the first row (${rowLength})`);
+				throw new SyntaxError(`CSV parse: Row ${i} does not have the same length as the first row (${rowLength})`);
 			}
 		}
 	}

@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 * Published to npm, now requiring different install method.
 * Converted to TypeScript.
 * The `parse` method now takes a `mapper` function directly, instead of containing it inside an `options` object.
+* The `parse` method now throws a `SyntaxError` instead of a generic `Error` if the csvString is malformed, more closely reflecting the behaviour of `JSON.parse`.
 
 ## [1.1.1] - 2021-08-01
 

@@ -21,7 +21,7 @@
 			<div class="content">
 				<h2>stringify</h2>
 
-				<code>stringify(data, options)</code>
+				<code>stringify(data: any[][], options?: StringifyOptions): string</code>
 
 				<p>Converts a 2D Array into a CSV string.</p>
 
@@ -31,26 +31,24 @@
 
 				<h3>Arguments</h3>
 
-				<h4>data</h4>
+				<h4><code>data: any[][]</code></h4>
 
 				<p>A 2D Array to convert into a CSV string.</p>
 
-				<h4>options</h4>
+				<h4><code>options?: StringifyOptions</code></h4>
 
 				<p>(Optional) an object containing any of these properties:</p>
 
 				<dl>
 					<div>
-						<dt><code>transpose</code></dt>
+						<dt><code>transpose?: boolean</code></dt>
 						<dd>
-							<p><code>boolean</code></p>
 							<p>If set to <codoe>true</code>, swap rows and columns before saving.</p>
 						</dd>
 					</div>
 					<div>
-						<dt><code>sanitise</code></dt>
+						<dt><code>sanitise?: boolean</code></dt>
 						<dd>
-							<p><code>boolean</code></p>
 							<p>If set to true, prepend each cell starting with <code>'=' | '-' | '+' | '@'</code> with a tab character. This prevents spreadsheet software like Excel from trying to execute code.</p>
 
 							<p>This option should be used when saving any data to a CSV that may include data from an untrusted source, such as user-generated data.</p>
@@ -91,11 +89,12 @@
 			<div class="content">
 				<h2>parse</h2>
 
-				<code>parse(data, options)</code>
+				<code>parse(csvString: string): string[][]</code>
+				<code>parse&lt;T&gt;(csvString: string, mapper: (cell: string) => T): T[][]</code>
 
 				<p>Converts a CSV string into a 2D Array.</p>
 
-				<p><code>parse</code> will throw an error if the string it is passed is malformed in one of these ways:</p>
+				<p><code>parse</code> will throw a <code>SyntaxError</code> if the string it is passed is malformed in one of these ways:</p>
 
 				<ul>
 					<li>Unclosed quote</li>
@@ -107,23 +106,15 @@
 
 				<h3>Arguments</h3>
 
-				<h4>data</h4>
+				<h4><code>csvString: string</code></h4>
 
 				<p>A CSV string to convert to a 2D Array.</p>
 
-				<h4>options</h4>
+				<h4><code>mapper?: (cell: string) => T</code></h4>
 
-				<p>(Optional) an object containing any of these properties:</p>
+				<p>A function that takes a string containing the value of a single CSV cell, and returns the value it should be mapped to.</p>
 
-				<dl>
-					<div>
-						<dt><code>mapper</code></dt>
-						<dd>
-							<p><code>function</code></p>
-							<p>A function that takes a string containing the value of a single CSV cell, and returns the value it should be mapped to.</p>
-						</dd>
-					</div>
-				</dl>
+				<p>If no mapper function is passed, <code>parse</code> will always return a 2D Array of strings. If a mapper function is passed, the 2D Array will be of the type returned by the mapper function.</p>
 
 				<h3>Examples</h3>
 
