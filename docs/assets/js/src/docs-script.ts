@@ -1,4 +1,4 @@
-import { stringify, parse } from 'csv';
+import { stringify, parse } from '@cipscis/csv';
 
 const stringifyInput = [
 	['Numbers', 0, 1, 2, 3],
@@ -29,8 +29,12 @@ document.querySelectorAll('.js-stringify__button').forEach(($el) => $el.addEvent
 
 	const str = stringify(stringifyInput, options);
 
-	$input.innerHTML = JSON.stringify(stringifyInput, null, '\t');
-	$output.innerHTML = str;
+	if ($input) {
+		$input.innerHTML = JSON.stringify(stringifyInput, null, '\t');
+	}
+	if ($output) {
+		$output.innerHTML = str;
+	}
 }));
 
 document.querySelectorAll('.js-parse__button').forEach(($el) => $el.addEventListener('click', () => {
@@ -40,19 +44,30 @@ document.querySelectorAll('.js-parse__button').forEach(($el) => $el.addEventList
 	const $mapIntegers = document.querySelector('.js-parse__map-integers');
 	const mapIntegersChecked = $mapIntegers instanceof HTMLInputElement ? $mapIntegers.checked : false;
 
-	const options = {};
-	if (mapIntegersChecked) {
-		options.mapper = (value) => {
-			if (+value === parseInt(value, 10)) {
-				return +value;
-			} else {
-				return value;
-			}
-		};
-	};
+	const data = (() => {
+		let data;
 
-	const data = parse(parseInput, options);
+		if (mapIntegersChecked) {
+			const mapper = (value: string) => {
+				if (+value === parseInt(value, 10)) {
+					return +value;
+				} else {
+					return value;
+				}
+			};
 
-	$input.innerHTML = parseInput;
-	$output.innerHTML = JSON.stringify(data, null, '\t');
+			data = parse(parseInput, mapper);
+		} else {
+			data = parse(parseInput);
+		}
+
+		return data;
+	})();
+
+	if ($input) {
+		$input.innerHTML = parseInput;
+	}
+	if ($output) {
+		$output.innerHTML = JSON.stringify(data, null, '\t');
+	}
 }));
