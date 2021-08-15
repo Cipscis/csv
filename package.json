@@ -2,7 +2,6 @@
 	"name": "@cipscis/csv",
 	"version": "2.0.0",
 	"description": "For parsing and stringifying CSV data.",
-	"private": true,
 	"main": "./dist/csv.js",
 	"types": "./dist/csv.d.ts",
 	"type": "module",
