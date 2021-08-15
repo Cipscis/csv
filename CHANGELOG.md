@@ -11,6 +11,10 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 * The `parse` method now takes a `mapper` function directly, instead of containing it inside an `options` object.
 * The `parse` method now throws a `SyntaxError` instead of a generic `Error` if the csvString is malformed, more closely reflecting the behaviour of `JSON.parse`.
 
+### Removed
+
+* Node <= 12 is no longer supported, due to the use of [optional chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining).
+
 ## [1.1.1] - 2021-08-01
 
 ### Added
