@@ -1,58 +1,58 @@
-import { stringify } from '../dist/csv.js';
+import { stringify } from '../dist/stringify.js';
 
 describe('stringify', () => {
 	it('can stringify simple CSV data', () => {
-		let csvData = [
+		const csvData = [
 			[1, 2, 3],
 			['a', 'b', 'c'],
 		];
-		let csvString = `1,2,3\na,b,c`;
+		const csvString = `1,2,3\na,b,c`;
 
 		expect(stringify(csvData)).toBe(csvString);
 	});
 
 	it('can pad short rows with empty cells', () => {
-		let csvData = [
+		const csvData = [
 			[1, 2, 3, 4, 5],
 			[1, 2, 3],
 		];
-		let csvString = `1,2,3,4,5\n1,2,3,,`;
+		const csvString = `1,2,3,4,5\n1,2,3,,`;
 
 		expect(stringify(csvData)).toBe(csvString);
 	});
 
 	it('can transpose data', () => {
-		let csvData = [
+		const csvData = [
 			['Title A', 1, 2, 3],
 			['Title B', 4, 5, 6],
 		];
-		let csvString = `Title A,Title B\n1,4\n2,5\n3,6`;
+		const csvString = `Title A,Title B\n1,4\n2,5\n3,6`;
 
-		let options = { transpose: true };
+		const options = { transpose: true };
 
 		expect(stringify(csvData, options)).toBe(csvString);
 	});
 
 	it('can sanitise data', () => {
-		let csvData = [
+		const csvData = [
 			['=Danger', '-Danger'],
 			['+Danger', '@Danger'],
 		];
-		let csvString = `\t=Danger,\t-Danger\n\t+Danger,\t@Danger`;
+		const csvString = `\t=Danger,\t-Danger\n\t+Danger,\t@Danger`;
 
-		let options = { sanitise: true };
+		const options = { sanitise: true };
 
 		expect(stringify(csvData, options)).toBe(csvString);
 	});
 
 	it('can transpose, pad, and sanitise data in the same call', () => {
-		let csvData = [
+		const csvData = [
 			['Title A', '=Malicious_Code()', 3],
 			['Title B', true],
 		];
-		let csvString = `Title A,Title B\n\t=Malicious_Code(),true\n3,`;
+		const csvString = `Title A,Title B\n\t=Malicious_Code(),true\n3,`;
 
-		let options = {
+		const options = {
 			transpose: true,
 			sanitise: true,
 		};
@@ -61,12 +61,41 @@ describe('stringify', () => {
 	});
 
 	it('stringifies falsey values appropriately', () => {
-		let csvData = [
+		const csvData = [
 			[null, undefined],
 			['', false],
-			[[], true]
+			[[], true],
 		];
-		let csvString = `null,\n,false\n,true`;
+		const csvString = `null,\n,false\n,true`;
+
+		expect(stringify(csvData)).toBe(csvString);
+	});
+
+	it('escapes commas', () => {
+		const csvData = [
+			[','],
+		];
+		const csvString = `","`;
+
+		expect(stringify(csvData)).toBe(csvString);
+	});
+
+	it('escapes double quotes', () => {
+		const csvData = [
+			['Test with "quote"', 'single quote"'],
+			['No quotes', '"lots""of""quotes"""']
+		];
+		const csvString = `"Test with ""quote""","single quote"""\nNo quotes,"""lots""""of""""quotes"""""""`;
+
+		expect(stringify(csvData)).toBe(csvString);
+	});
+
+	it('escapes newlines', () => {
+		const csvData = [
+			['Newline\nonly', 'Carriage\rreturn only'],
+			['Both\r\nvariant A', 'Both\n\rvariant B']
+		];
+		const csvString = `"Newline\nonly","Carriage\rreturn only"\n"Both\r\nvariant A","Both\n\rvariant B"`;
 
 		expect(stringify(csvData)).toBe(csvString);
 	});

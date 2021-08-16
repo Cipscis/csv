@@ -2,6 +2,20 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+### Fixed
+
+* Values containing carriage returns are now correctly escaped when using the `stringify` method.
+
+### Changed
+
+* Moved `stringify` and `parse` methods into their own files.
+
+### Added
+
+* The `stringify` and `parse` methods can now be imported on their own if needed.
+
 ## [2.0.0] - 2021-08-15
 
 ### Changed
