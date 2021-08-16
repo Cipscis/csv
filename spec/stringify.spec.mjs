@@ -89,4 +89,14 @@ describe('stringify', () => {
 
 		expect(stringify(csvData)).toBe(csvString);
 	});
+
+	it('escapes newlines', () => {
+		const csvData = [
+			['Newline\nonly', 'Carriage\rreturn only'],
+			['Both\r\nvariant A', 'Both\n\rvariant B']
+		];
+		const csvString = `"Newline\nonly","Carriage\rreturn only"\n"Both\r\nvariant A","Both\n\rvariant B"`;
+
+		expect(stringify(csvData)).toBe(csvString);
+	});
 });

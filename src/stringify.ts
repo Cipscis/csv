@@ -131,7 +131,7 @@ function _escapeCell(cell: any, options?: StringifyOptions): string {
 	}
 
 	// Escape
-	if (cellString.match(/,|"|\n/)) {
+	if (cellString.match(/,|"|\n|\r/)) {
 		// Turn any double quotes into escaped double quotes
 		cellString = cellString.replace(/"/g, '""');
 
