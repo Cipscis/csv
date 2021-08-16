@@ -1,27 +1,27 @@
-import { parse } from '../dist/csv.js';
+import { parse } from '../dist/parse.js';
 
 describe('parse', () => {
 	it('ensures a CSV string contains rows of equal length', () => {
-		let csvString = `1,2,3\n1,2`;
+		const csvString = `1,2,3\n1,2`;
 
 		expect(() => parse(csvString)).toThrow();
 	});
 
 	it('throws an error if a CSV string ends with a quote still open', () => {
-		let csvString = `"This quote doesn't end`;
+		const csvString = `"This quote doesn't end`;
 
 		expect(() => parse(csvString)).toThrow();
 	});
 
 	it('throws an error if a CSV string contains a value that is partly a quote and partly not a quote', () => {
-		let csvString = `"This value is partly a quote" and partly not a quote`;
+		const csvString = `"This value is partly a quote" and partly not a quote`;
 
 		expect(() => parse(csvString)).toThrow();
 	});
 
 	it('can parse a simple CSV', () => {
-		let csvString = `1,2,3\na,b,c`;
-		let csvData = [
+		const csvString = `1,2,3\na,b,c`;
+		const csvData = [
 			['1', '2', '3'],
 			['a', 'b', 'c'],
 		];
@@ -30,8 +30,8 @@ describe('parse', () => {
 	});
 
 	it('can parse a CSV string containing quotes', () => {
-		let csvString = `"test","quotes"\n"second","row"`;
-		let csvData = [
+		const csvString = `"test","quotes"\n"second","row"`;
+		const csvData = [
 			['test', 'quotes'],
 			['second', 'row'],
 		];
@@ -40,8 +40,8 @@ describe('parse', () => {
 	});
 
 	it('can parse quotes containing escaped double quote characters', () => {
-		let csvString = `"quote with ""escaped quotes"""\n"second row with ""more"" escaped characters"`;
-		let csvData = [
+		const csvString = `"quote with ""escaped quotes"""\n"second row with ""more"" escaped characters"`;
+		const csvData = [
 			['quote with "escaped quotes"'],
 			['second row with "more" escaped characters'],
 		];
@@ -50,8 +50,8 @@ describe('parse', () => {
 	});
 
 	it('can parse quotes containing commas', () => {
-		let csvString = `"value with, comma",second value\nthird value,"another one, with a comma"`;
-		let csvData = [
+		const csvString = `"value with, comma",second value\nthird value,"another one, with a comma"`;
+		const csvData = [
 			['value with, comma', 'second value'],
 			['third value', 'another one, with a comma'],
 		];
@@ -60,8 +60,8 @@ describe('parse', () => {
 	});
 
 	it('can parse CSV strings not ending with a newline', () => {
-		let csvString = `1,2,3\n4,5,6`;
-		let csvData = [
+		const csvString = `1,2,3\n4,5,6`;
+		const csvData = [
 			['1', '2', '3'],
 			['4', '5', '6'],
 		];
@@ -70,8 +70,8 @@ describe('parse', () => {
 	});
 
 	it('can parse CSV strings ending with a newline', () => {
-		let csvString = `1,2,3\n4,5,6\n`;
-		let csvData = [
+		const csvString = `1,2,3\n4,5,6\n`;
+		const csvData = [
 			['1', '2', '3'],
 			['4', '5', '6'],
 		];
@@ -80,13 +80,13 @@ describe('parse', () => {
 	});
 
 	it('can transform values based on its mapper option', () => {
-		let csvString = `1,2,3\ntrue,false,null`;
-		let csvData = [
+		const csvString = `1,2,3\ntrue,false,null`;
+		const csvData = [
 			[1, 2, 3],
 			[true, false, null],
 		];
 
-		let mapper = (value) => {
+		const mapper = (value) => {
 			switch (value) {
 				case 'true':
 					return true;

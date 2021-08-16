@@ -22,6 +22,8 @@ const config = {
 		extensions: ['.js', '.ts'],
 		alias: {
 			'@cipscis/csv': `${srcPath}/csv.ts`,
+			'./stringify.js': './stringify.ts',
+			'./parse.js': './parse.ts',
 		},
 	},
 	module: {

@@ -9,7 +9,9 @@
 		"strict": true,
 		"moduleResolution": "node",
 		"paths": {
-			"@cipscis/csv": ["./src/csv.ts"]
+			"@cipscis/csv": ["./src/csv.ts"],
+			"./stringify.js": ["./stringify.ts"],
+			"./parse.js": ["./parse.ts"]
 		},
 		"esModuleInterop": true,
 		"skipLibCheck": true,
