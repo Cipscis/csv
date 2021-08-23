@@ -1,6 +1,6 @@
 {
 	"name": "@cipscis/csv",
-	"version": "2.1.0",
+	"version": "2.1.1",
 	"description": "For parsing and stringifying CSV data.",
 	"main": "./dist/csv.js",
 	"exports": {

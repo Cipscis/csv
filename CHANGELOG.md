@@ -2,6 +2,12 @@
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+### Changed
+
+* Simplified TypeScript build system.
+
 ## [2.1.0] - 2021-08-16
 
 ### Fixed
